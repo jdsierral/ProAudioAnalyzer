@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StereoViewController: UIViewController {
+class StereoViewController: UIAnalyzerViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

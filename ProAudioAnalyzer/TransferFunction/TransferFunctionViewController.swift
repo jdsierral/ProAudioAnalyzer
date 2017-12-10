@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TransferFunctionViewController: UIViewController {
+class TransferFunctionViewController: UIAnalyzerViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

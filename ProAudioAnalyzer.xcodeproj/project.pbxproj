@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C4F34B21FDDE6A800DB82DA /* BaseTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F34AC1FDDE6A600DB82DA /* BaseTracker.swift */; };
+		2C4F34B31FDDE6A800DB82DA /* Holders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F34AD1FDDE6A600DB82DA /* Holders.swift */; };
+		2C4F34B41FDDE6A800DB82DA /* Meter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F34AE1FDDE6A700DB82DA /* Meter.swift */; };
+		2C4F34B51FDDE6A800DB82DA /* DecibelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F34AF1FDDE6A700DB82DA /* DecibelManager.swift */; };
+		2C4F34B61FDDE6A800DB82DA /* Trackers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F34B01FDDE6A700DB82DA /* Trackers.swift */; };
+		2C4F34B71FDDE6A800DB82DA /* DynamicsAnalayzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F34B11FDDE6A700DB82DA /* DynamicsAnalayzer.swift */; };
+		2C4F34BB1FDDE6C200DB82DA /* MeterBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F34B81FDDE6C100DB82DA /* MeterBarView.swift */; };
+		2C4F34BC1FDDE6C200DB82DA /* MeterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F34B91FDDE6C100DB82DA /* MeterView.swift */; };
+		2C4F34BD1FDDE6C200DB82DA /* MeterTicksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4F34BA1FDDE6C200DB82DA /* MeterTicksView.swift */; };
 		2CBF50B41FDD3D9C000168FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50B31FDD3D9C000168FA /* AppDelegate.swift */; };
 		2CBF50B91FDD3D9C000168FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF50B71FDD3D9C000168FA /* Main.storyboard */; };
 		2CBF50BB1FDD3D9C000168FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF50BA1FDD3D9C000168FA /* Assets.xcassets */; };
@@ -17,11 +26,20 @@
 		2CBF50D01FDD459E000168FA /* StereoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50CF1FDD459E000168FA /* StereoViewController.swift */; };
 		2CBF50D21FDD45BD000168FA /* TransferFunctionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50D11FDD45BD000168FA /* TransferFunctionViewController.swift */; };
 		2CBF50D51FDD4608000168FA /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50D41FDD4608000168FA /* ConfigViewController.swift */; };
-		2CBF50D71FDD6A11000168FA /* AnalyzerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50D61FDD6A11000168FA /* AnalyzerController.swift */; };
+		2CBF50D71FDD6A11000168FA /* AnalyzerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50D61FDD6A11000168FA /* AnalyzerViewController.swift */; };
 		2CBF50D91FDD6A6C000168FA /* AudioAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50D81FDD6A6C000168FA /* AudioAnalyzer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C4F34AC1FDDE6A600DB82DA /* BaseTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTracker.swift; sourceTree = "<group>"; };
+		2C4F34AD1FDDE6A600DB82DA /* Holders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Holders.swift; sourceTree = "<group>"; };
+		2C4F34AE1FDDE6A700DB82DA /* Meter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meter.swift; sourceTree = "<group>"; };
+		2C4F34AF1FDDE6A700DB82DA /* DecibelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecibelManager.swift; sourceTree = "<group>"; };
+		2C4F34B01FDDE6A700DB82DA /* Trackers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trackers.swift; sourceTree = "<group>"; };
+		2C4F34B11FDDE6A700DB82DA /* DynamicsAnalayzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicsAnalayzer.swift; sourceTree = "<group>"; };
+		2C4F34B81FDDE6C100DB82DA /* MeterBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeterBarView.swift; sourceTree = "<group>"; };
+		2C4F34B91FDDE6C100DB82DA /* MeterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeterView.swift; sourceTree = "<group>"; };
+		2C4F34BA1FDDE6C200DB82DA /* MeterTicksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeterTicksView.swift; sourceTree = "<group>"; };
 		2CBF50B01FDD3D9C000168FA /* ProAudioAnalyzer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProAudioAnalyzer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CBF50B31FDD3D9C000168FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CBF50B81FDD3D9C000168FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -34,7 +52,7 @@
 		2CBF50CF1FDD459E000168FA /* StereoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereoViewController.swift; sourceTree = "<group>"; };
 		2CBF50D11FDD45BD000168FA /* TransferFunctionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFunctionViewController.swift; sourceTree = "<group>"; };
 		2CBF50D41FDD4608000168FA /* ConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
-		2CBF50D61FDD6A11000168FA /* AnalyzerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnalyzerController.swift; path = ProAudioAnalyzer/AnalyzerController.swift; sourceTree = SOURCE_ROOT; };
+		2CBF50D61FDD6A11000168FA /* AnalyzerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnalyzerViewController.swift; path = ProAudioAnalyzer/AnalyzerViewController.swift; sourceTree = SOURCE_ROOT; };
 		2CBF50D81FDD6A6C000168FA /* AudioAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AudioAnalyzer.swift; path = ProAudioAnalyzer/AudioAnalyzer.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -49,6 +67,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C4F34A81FDDE67900DB82DA /* DSP */ = {
+			isa = PBXGroup;
+			children = (
+				2C4F34AC1FDDE6A600DB82DA /* BaseTracker.swift */,
+				2C4F34AF1FDDE6A700DB82DA /* DecibelManager.swift */,
+				2C4F34B11FDDE6A700DB82DA /* DynamicsAnalayzer.swift */,
+				2C4F34AD1FDDE6A600DB82DA /* Holders.swift */,
+				2C4F34AE1FDDE6A700DB82DA /* Meter.swift */,
+				2C4F34B01FDDE6A700DB82DA /* Trackers.swift */,
+			);
+			path = DSP;
+			sourceTree = "<group>";
+		};
+		2C4F34A91FDDE68100DB82DA /* DSP */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DSP;
+			sourceTree = "<group>";
+		};
+		2C4F34AA1FDDE68400DB82DA /* DSP */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DSP;
+			sourceTree = "<group>";
+		};
+		2C4F34AB1FDDE68E00DB82DA /* DSP */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DSP;
+			sourceTree = "<group>";
+		};
 		2CBF50A71FDD3D9B000168FA = {
 			isa = PBXGroup;
 			children = (
@@ -70,9 +122,11 @@
 			children = (
 				2CBF50C51FDD3E35000168FA /* AudioController.swift */,
 				2CBF50B31FDD3D9C000168FA /* AppDelegate.swift */,
-				2CBF50C91FDD3E9B000168FA /* StereoImage */,
-				2CBF50C81FDD3E91000168FA /* Spectrum */,
+				2CBF50D61FDD6A11000168FA /* AnalyzerViewController.swift */,
+				2CBF50D81FDD6A6C000168FA /* AudioAnalyzer.swift */,
 				2CBF50C71FDD3E8B000168FA /* Dynamics */,
+				2CBF50C81FDD3E91000168FA /* Spectrum */,
+				2CBF50C91FDD3E9B000168FA /* StereoImage */,
 				2CBF50CA1FDD3EAE000168FA /* TransferFunction */,
 				2CBF50D31FDD45C7000168FA /* Config */,
 				2CBF50B71FDD3D9C000168FA /* Main.storyboard */,
@@ -87,6 +141,10 @@
 			isa = PBXGroup;
 			children = (
 				2CBF50CB1FDD451F000168FA /* DynamicsViewController.swift */,
+				2C4F34B81FDDE6C100DB82DA /* MeterBarView.swift */,
+				2C4F34BA1FDDE6C200DB82DA /* MeterTicksView.swift */,
+				2C4F34B91FDDE6C100DB82DA /* MeterView.swift */,
+				2C4F34A81FDDE67900DB82DA /* DSP */,
 			);
 			path = Dynamics;
 			sourceTree = "<group>";
@@ -95,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				2CBF50CD1FDD4580000168FA /* SpectrumViewController.swift */,
+				2C4F34A91FDDE68100DB82DA /* DSP */,
 			);
 			path = Spectrum;
 			sourceTree = "<group>";
@@ -103,8 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				2CBF50CF1FDD459E000168FA /* StereoViewController.swift */,
-				2CBF50D61FDD6A11000168FA /* AnalyzerController.swift */,
-				2CBF50D81FDD6A6C000168FA /* AudioAnalyzer.swift */,
+				2C4F34AA1FDDE68400DB82DA /* DSP */,
 			);
 			path = StereoImage;
 			sourceTree = "<group>";
@@ -113,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				2CBF50D11FDD45BD000168FA /* TransferFunctionViewController.swift */,
+				2C4F34AB1FDDE68E00DB82DA /* DSP */,
 			);
 			path = TransferFunction;
 			sourceTree = "<group>";
@@ -197,14 +256,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C4F34B51FDDE6A800DB82DA /* DecibelManager.swift in Sources */,
+				2C4F34BC1FDDE6C200DB82DA /* MeterView.swift in Sources */,
 				2CBF50D01FDD459E000168FA /* StereoViewController.swift in Sources */,
+				2C4F34BD1FDDE6C200DB82DA /* MeterTicksView.swift in Sources */,
+				2C4F34B61FDDE6A800DB82DA /* Trackers.swift in Sources */,
 				2CBF50D51FDD4608000168FA /* ConfigViewController.swift in Sources */,
 				2CBF50C61FDD3E35000168FA /* AudioController.swift in Sources */,
+				2C4F34B41FDDE6A800DB82DA /* Meter.swift in Sources */,
 				2CBF50CC1FDD451F000168FA /* DynamicsViewController.swift in Sources */,
+				2C4F34B31FDDE6A800DB82DA /* Holders.swift in Sources */,
 				2CBF50D91FDD6A6C000168FA /* AudioAnalyzer.swift in Sources */,
+				2C4F34B21FDDE6A800DB82DA /* BaseTracker.swift in Sources */,
+				2C4F34BB1FDDE6C200DB82DA /* MeterBarView.swift in Sources */,
 				2CBF50B41FDD3D9C000168FA /* AppDelegate.swift in Sources */,
-				2CBF50D71FDD6A11000168FA /* AnalyzerController.swift in Sources */,
+				2CBF50D71FDD6A11000168FA /* AnalyzerViewController.swift in Sources */,
 				2CBF50D21FDD45BD000168FA /* TransferFunctionViewController.swift in Sources */,
+				2C4F34B71FDDE6A800DB82DA /* DynamicsAnalayzer.swift in Sources */,
 				2CBF50CE1FDD4580000168FA /* SpectrumViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

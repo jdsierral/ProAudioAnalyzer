@@ -19,7 +19,9 @@ class AVAudioController {
     }
     var bufSize: UInt32 {
         set { configureAudioSession(sampleRate: sampleRate, bufSize: newValue) }
-        get { return UInt32(session.ioBufferDuration * sampleRate) }
+        get { let size = UInt32(session.ioBufferDuration * sampleRate)
+            return size.nextPowOf2
+        }
     }
 
     var session: AVAudioSession
@@ -150,3 +152,17 @@ extension AVAudioController {
     }
 }
 
+extension UInt32 {
+    var nextPowOf2: UInt32 {
+		var x = self
+        x -= 1
+        x |= x >> 1
+        x |= x >> 2
+        x |= x >> 4
+        x |= x >> 8
+        x |= x >> 16
+		x += 1
+        return x
+        // Taken from bit Twiddling hacks page
+    }
+}

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DynamicsViewController: UIViewController {
+class DynamicsViewController: UIAnalyzerViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

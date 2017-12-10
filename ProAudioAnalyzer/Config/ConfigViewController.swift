@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConfigViewController: UIViewController {
+class ConfigViewController: UIAnalyzerViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

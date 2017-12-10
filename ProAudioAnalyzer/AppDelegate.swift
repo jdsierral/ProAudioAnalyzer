@@ -14,9 +14,13 @@ let DBG = true
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var audioController: AVAudioController!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+
+        let sampleRate = 44100.0
+        let bufSize: UInt32 = 512
+        audioController = AVAudioController(sampleRate: sampleRate, bufSize: bufSize)
         // Override point for customization after application launch.
         return true
     }

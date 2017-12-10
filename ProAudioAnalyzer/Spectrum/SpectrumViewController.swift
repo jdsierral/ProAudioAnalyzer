@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SpectrumViewController: UIViewController {
+class SpectrumViewController: UIAnalyzerViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
