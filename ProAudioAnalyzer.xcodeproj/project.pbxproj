@@ -8,20 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		2CBF50B41FDD3D9C000168FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50B31FDD3D9C000168FA /* AppDelegate.swift */; };
-		2CBF50B61FDD3D9C000168FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50B51FDD3D9C000168FA /* ViewController.swift */; };
 		2CBF50B91FDD3D9C000168FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF50B71FDD3D9C000168FA /* Main.storyboard */; };
 		2CBF50BB1FDD3D9C000168FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF50BA1FDD3D9C000168FA /* Assets.xcassets */; };
 		2CBF50BE1FDD3D9C000168FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF50BC1FDD3D9C000168FA /* LaunchScreen.storyboard */; };
+		2CBF50C61FDD3E35000168FA /* AudioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50C51FDD3E35000168FA /* AudioController.swift */; };
+		2CBF50CC1FDD451F000168FA /* DynamicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50CB1FDD451F000168FA /* DynamicsViewController.swift */; };
+		2CBF50CE1FDD4580000168FA /* SpectrumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50CD1FDD4580000168FA /* SpectrumViewController.swift */; };
+		2CBF50D01FDD459E000168FA /* StereoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50CF1FDD459E000168FA /* StereoViewController.swift */; };
+		2CBF50D21FDD45BD000168FA /* TransferFunctionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50D11FDD45BD000168FA /* TransferFunctionViewController.swift */; };
+		2CBF50D51FDD4608000168FA /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50D41FDD4608000168FA /* ConfigViewController.swift */; };
+		2CBF50D71FDD6A11000168FA /* AnalyzerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50D61FDD6A11000168FA /* AnalyzerController.swift */; };
+		2CBF50D91FDD6A6C000168FA /* AudioAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50D81FDD6A6C000168FA /* AudioAnalyzer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2CBF50B01FDD3D9C000168FA /* ProAudioAnalyzer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProAudioAnalyzer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CBF50B31FDD3D9C000168FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2CBF50B51FDD3D9C000168FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2CBF50B81FDD3D9C000168FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2CBF50BA1FDD3D9C000168FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CBF50BD1FDD3D9C000168FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2CBF50BF1FDD3D9C000168FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CBF50C51FDD3E35000168FA /* AudioController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioController.swift; sourceTree = "<group>"; };
+		2CBF50CB1FDD451F000168FA /* DynamicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicsViewController.swift; sourceTree = "<group>"; };
+		2CBF50CD1FDD4580000168FA /* SpectrumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumViewController.swift; sourceTree = "<group>"; };
+		2CBF50CF1FDD459E000168FA /* StereoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereoViewController.swift; sourceTree = "<group>"; };
+		2CBF50D11FDD45BD000168FA /* TransferFunctionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFunctionViewController.swift; sourceTree = "<group>"; };
+		2CBF50D41FDD4608000168FA /* ConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
+		2CBF50D61FDD6A11000168FA /* AnalyzerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnalyzerController.swift; path = ProAudioAnalyzer/AnalyzerController.swift; sourceTree = SOURCE_ROOT; };
+		2CBF50D81FDD6A6C000168FA /* AudioAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AudioAnalyzer.swift; path = ProAudioAnalyzer/AudioAnalyzer.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +68,61 @@
 		2CBF50B21FDD3D9C000168FA /* ProAudioAnalyzer */ = {
 			isa = PBXGroup;
 			children = (
+				2CBF50C51FDD3E35000168FA /* AudioController.swift */,
 				2CBF50B31FDD3D9C000168FA /* AppDelegate.swift */,
-				2CBF50B51FDD3D9C000168FA /* ViewController.swift */,
+				2CBF50C91FDD3E9B000168FA /* StereoImage */,
+				2CBF50C81FDD3E91000168FA /* Spectrum */,
+				2CBF50C71FDD3E8B000168FA /* Dynamics */,
+				2CBF50CA1FDD3EAE000168FA /* TransferFunction */,
+				2CBF50D31FDD45C7000168FA /* Config */,
 				2CBF50B71FDD3D9C000168FA /* Main.storyboard */,
 				2CBF50BA1FDD3D9C000168FA /* Assets.xcassets */,
 				2CBF50BC1FDD3D9C000168FA /* LaunchScreen.storyboard */,
 				2CBF50BF1FDD3D9C000168FA /* Info.plist */,
 			);
 			path = ProAudioAnalyzer;
+			sourceTree = "<group>";
+		};
+		2CBF50C71FDD3E8B000168FA /* Dynamics */ = {
+			isa = PBXGroup;
+			children = (
+				2CBF50CB1FDD451F000168FA /* DynamicsViewController.swift */,
+			);
+			path = Dynamics;
+			sourceTree = "<group>";
+		};
+		2CBF50C81FDD3E91000168FA /* Spectrum */ = {
+			isa = PBXGroup;
+			children = (
+				2CBF50CD1FDD4580000168FA /* SpectrumViewController.swift */,
+			);
+			path = Spectrum;
+			sourceTree = "<group>";
+		};
+		2CBF50C91FDD3E9B000168FA /* StereoImage */ = {
+			isa = PBXGroup;
+			children = (
+				2CBF50CF1FDD459E000168FA /* StereoViewController.swift */,
+				2CBF50D61FDD6A11000168FA /* AnalyzerController.swift */,
+				2CBF50D81FDD6A6C000168FA /* AudioAnalyzer.swift */,
+			);
+			path = StereoImage;
+			sourceTree = "<group>";
+		};
+		2CBF50CA1FDD3EAE000168FA /* TransferFunction */ = {
+			isa = PBXGroup;
+			children = (
+				2CBF50D11FDD45BD000168FA /* TransferFunctionViewController.swift */,
+			);
+			path = TransferFunction;
+			sourceTree = "<group>";
+		};
+		2CBF50D31FDD45C7000168FA /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				2CBF50D41FDD4608000168FA /* ConfigViewController.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,8 +197,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CBF50B61FDD3D9C000168FA /* ViewController.swift in Sources */,
+				2CBF50D01FDD459E000168FA /* StereoViewController.swift in Sources */,
+				2CBF50D51FDD4608000168FA /* ConfigViewController.swift in Sources */,
+				2CBF50C61FDD3E35000168FA /* AudioController.swift in Sources */,
+				2CBF50CC1FDD451F000168FA /* DynamicsViewController.swift in Sources */,
+				2CBF50D91FDD6A6C000168FA /* AudioAnalyzer.swift in Sources */,
 				2CBF50B41FDD3D9C000168FA /* AppDelegate.swift in Sources */,
+				2CBF50D71FDD6A11000168FA /* AnalyzerController.swift in Sources */,
+				2CBF50D21FDD45BD000168FA /* TransferFunctionViewController.swift in Sources */,
+				2CBF50CE1FDD4580000168FA /* SpectrumViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

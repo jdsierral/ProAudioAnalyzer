@@ -8,6 +8,8 @@
 
 import UIKit
 
+let DBG = true
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
