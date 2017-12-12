@@ -11,6 +11,10 @@ import AVFoundation
 
 class AVAudioController {
 
+    private var availableSampleRates: [Double] = [44100, 48000, 88200, 96000]
+    private var availableBufferSizes: [UInt32] = [64, 128, 256, 512, 1024]
+
+
     var sampleRate: Double {
         set { configureAudioSession(sampleRate: newValue,
                                     bufSize: UInt32(session.ioBufferDuration * newValue))
@@ -130,6 +134,10 @@ class AVAudioController {
     func deregisterObservers() {
         // TODO
     }
+
+
+
+
 }
 
 extension AVAudioController {
@@ -160,6 +168,59 @@ extension AVAudioController {
         runAudioEngine()
     }
 }
+
+extension AVAudioController {
+
+    func getCurrentEnginesName() -> String{
+        return session.currentRoute.inputs.first?.portName ?? String()
+    }
+
+    func selectNextAudioEngine() {
+		// TODO
+    }
+    func selectPreviousAudioEngine(){
+        // TODO
+    }
+    func selectNextSampleRate(){
+        if let idx = availableSampleRates.index(of: sampleRate) {
+            let newIdx = (idx + 1) % availableSampleRates.count
+            terminateAudioSession()
+            initializeAudioSession(sampleRate: availableSampleRates[newIdx], bufSize: bufSize)
+        } else {
+            terminateAudioSession()
+            initializeAudioSession(sampleRate: availableSampleRates[0], bufSize: bufSize)
+        }
+    }
+    func selectPreviousSampleRate(){
+        if let idx = availableSampleRates.index(of: sampleRate) {
+            let newIdx = (idx - 1 + availableSampleRates.count) % availableSampleRates.count
+            terminateAudioSession()
+            initializeAudioSession(sampleRate: availableSampleRates[newIdx], bufSize: bufSize)
+        } else {
+            terminateAudioSession()
+            initializeAudioSession(sampleRate: availableSampleRates[0], bufSize: bufSize)
+        }
+    }
+    func selectNextBufferSize(){
+        if let idx = availableBufferSizes.index(of: bufSize) {
+            let newIdx = (idx + 1) % availableBufferSizes.count
+            terminateAudioSession()
+            initializeAudioSession(sampleRate: sampleRate, bufSize: availableBufferSizes[newIdx])
+        } else {
+            terminateAudioSession()
+            initializeAudioSession(sampleRate: sampleRate, bufSize: availableBufferSizes[0])
+        }
+    }
+    func selectPreviousBufferSize(){
+        if let idx = availableBufferSizes.index(of: bufSize) {
+            let newIdx = (idx - 1 + availableBufferSizes.count) % availableBufferSizes.count
+            configureAudioSession(sampleRate: sampleRate, bufSize: availableBufferSizes[newIdx])
+        } else {
+            configureAudioSession(sampleRate: sampleRate, bufSize: availableBufferSizes[0])
+        }
+    }
+}
+
 
 extension UInt32 {
     var nextPowOf2: UInt32 {

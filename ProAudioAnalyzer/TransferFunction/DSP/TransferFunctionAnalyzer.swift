@@ -7,33 +7,35 @@
 //
 
 import Foundation
+import Accelerate
 
 class TransferFunctionAnalyzer: AudioAnalyzer {
-    var magSpectrum: Spectrum!
-    var phaSpectrum: Spectrum!
-    private var lBuf: UnsafeMutablePointer<Double>!
-    private var rBuf: UnsafeMutablePointer<Double>!
+
+    private var srcBuf: UnsafeMutablePointer<Double>!
+    private var refBuf: UnsafeMutablePointer<Double>!
+    var transferFunction: TransferFunction!
+
 
     private var writePos = 0 {
         didSet {
             if writePos == bufSize {
-                magSpectrum.computeSpectrum(dataPtr: lBuf)
-                phaSpectrum.computeSpectrum(dataPtr: rBuf)
+                transferFunction.computeTransferFunction(srcDataPtr: srcBuf, refDataPtr: refBuf)
+                writePos = 0
             }
         }
     }
 
     override func initialize() {
-        magSpectrum = Spectrum(name: "Mag", fftSize: bufSize, sampleRate: sampleRate)
-        phaSpectrum = Spectrum(name: "Pha", fftSize: bufSize, sampleRate: sampleRate)
 
-        lBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(bufSize))
-        rBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(bufSize))
+		transferFunction = TransferFunction(fftSize: bufSize, sampleRate: sampleRate)
+
+        srcBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(bufSize))
+        refBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(bufSize))
     }
 
     override func process(leftInput: Float, rightInput: Float) {
-        lBuf[writePos] = Double(leftInput)
-        rBuf[writePos] = Double(rightInput)
+        srcBuf[writePos] = Double(leftInput)
+        refBuf[writePos] = Double(rightInput)
         writePos += 1
     }
 }

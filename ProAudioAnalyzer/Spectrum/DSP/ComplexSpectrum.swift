@@ -9,29 +9,24 @@
 import Foundation
 import Accelerate
 
-class ComplexSpectrum {
+class ComplexSpectrum : Spectrum {
     var ID: String
-    var fft: FFT
-    var fftSize: Int { return Int(fft.fftSize) }
 
     var real: UnsafeMutablePointer<Double>
     var imag: UnsafeMutablePointer<Double>
     var spectrum: DSPDoubleSplitComplex
 
     init(name: String, fftSize: UInt32, sampleRate: Double) {
-        ID = name
-        fft = FFT(fftSize: fftSize)
-
         let array = UnsafeMutablePointer<Double>.allocate(capacity: Int(fftSize) * 2)
-
         real = array
         imag = array.advanced(by: Int(fftSize))
-
         spectrum = DSPDoubleSplitComplex(realp: real, imagp: imag)
+        ID = name
+        super.init()
+        fft = FFT(fftSize: fftSize)
     }
 
     func computeSpectrum(dataPtr: UnsafeMutablePointer<Double>) {
 		fft.process(dataPtr: dataPtr, specPtr: &spectrum)
     }
-
 }

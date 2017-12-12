@@ -10,6 +10,7 @@ import Foundation
 import Accelerate
 
 class PhaseSpectrum: Spectrum {
+    var ID: String
 
     var spectrumPha: UnsafeMutablePointer<Double>
     var spectrumPhaDeg: UnsafeMutablePointer<Double>
@@ -20,14 +21,13 @@ class PhaseSpectrum: Spectrum {
     private var degMutl: Double = 0.0
     private var degAdd: Double = 0.0
 
-    override init(name: String, fftSize: UInt32, sampleRate: Double) {
+    init(name: String, fftSize: UInt32, sampleRate: Double) {
         ID = name
-        fft = FFT(fftSize: fftSize)
-
         let fftSz = Int(fftSize)
-
         spectrumPha =  UnsafeMutablePointer<Double>.allocate(capacity: fftSz)
         spectrumPhaDeg =  UnsafeMutablePointer<Double>.allocate(capacity: fftSz)
         spectrumPhaDegNorm =  UnsafeMutablePointer<Double>.allocate(capacity: fftSz)
+        super.init()
+        fft = FFT(fftSize: fftSize)
     }
 }

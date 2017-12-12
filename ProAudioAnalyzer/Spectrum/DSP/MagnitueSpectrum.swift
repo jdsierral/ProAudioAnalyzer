@@ -10,11 +10,9 @@ import Foundation
 import Accelerate
 
 
-class MagnitudeSpectrum {
+class MagnitudeSpectrum : Spectrum{
 
     var ID: String
-    var fft: FFT
-    var fftSize: Int { return Int(fft.fftSize) }
 
 //    public static var settings = DefaultSettings.defaultSpectrumSettings
 
@@ -31,17 +29,14 @@ class MagnitudeSpectrum {
 
     init(name: String, fftSize: UInt32, sampleRate: Double) {
         ID = name
-		fft = FFT(fftSize: fftSize)
-
         let fftSz = Int(fftSize)
-
         spectrumMag = UnsafeMutablePointer<Double>.allocate(capacity: fftSz)
         spectrumMagdB = UnsafeMutablePointer<Double>.allocate(capacity: fftSz)
         spectrumMagdBNorm = UnsafeMutablePointer<Double>.allocate(capacity: fftSz)
-
+        super.init()
+        calculateNormalizationAffineTransform()
+        fft = FFT(fftSize: fftSize)
         fft.setWindowTypeForCurrentSetup(type: .hamming)
-
-		calculateNormalizationAffineTransform()
     }
 
     deinit {
@@ -62,13 +57,13 @@ class MagnitudeSpectrum {
         vDSP_vsmsaD(spectrumMagdB, 1, &normalMult, &normalAdd, spectrumMagdBNorm, 1, fft.fftSize)
     }
 
-    func triggerUpdate(completion: () -> Void) {
+    override func triggerUpdate(completion: () -> Void) {
         calculateSpectrumIndB()
         calculateSpectrumInNormalizeddB()
         completion()
     }
 
-    func dumpData(ptr: UnsafeMutableRawPointer) {
+    override func dumpData(ptr: UnsafeMutableRawPointer) {
         ptr.copyBytes(from: UnsafeRawPointer(spectrumMagdBNorm), count: fftSize * MemoryLayout<Double>.size)
     }
 

@@ -28,8 +28,8 @@ class SpectrumAnalyzer : AudioAnalyzer {
     }
 
     override func initialize() {
-        lSpectrum = MagnitueSpectrum(name: "Left", fftSize: bufSize, sampleRate: sampleRate)
-        rSpectrum = MagnitueSpectrum(name: "Rigth", fftSize: bufSize, sampleRate: sampleRate)
+        lSpectrum = MagnitudeSpectrum(name: "Left", fftSize: bufSize, sampleRate: sampleRate)
+        rSpectrum = MagnitudeSpectrum(name: "Rigth", fftSize: bufSize, sampleRate: sampleRate)
         lBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(bufSize))
         rBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(bufSize))
     }

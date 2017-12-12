@@ -381,12 +381,6 @@
                     <view key="view" contentMode="scaleToFill" id="8Fa-xU-etn">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="kAg-lW-M0k">
-                                <rect key="frame" x="130" y="175" width="118" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </slider>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="CwN-ZI-KPF"/>
                     </view>
@@ -579,11 +573,11 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Vu0-hQ-WQd">
                                 <rect key="frame" x="20" y="131.5" width="984" height="567.5"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yyw-9s-yQQ">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yyw-9s-yQQ" customClass="SpectrumView" customModule="ProAudioAnalyzer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="984" height="274"/>
                                         <color key="backgroundColor" red="0.69211656389999998" green="0.94079526820000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1F-ye-07L">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1F-ye-07L" customClass="SpectrumView" customModule="ProAudioAnalyzer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="294" width="984" height="273.5"/>
                                         <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
@@ -603,7 +597,11 @@
                         <viewLayoutGuide key="safeArea" id="YdL-pr-cog"/>
                     </view>
                     <navigationItem key="navigationItem" id="gIx-qv-zVF">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="rfb-Vj-fBw"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="rfb-Vj-fBw">
+                            <connections>
+                                <action selector="EditButtonWasPressed:" destination="kTU-6d-Wuf" id="Vvs-M8-eS6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="magSpectrumView" destination="yyw-9s-yQQ" id="UCP-oX-CDI"/>
@@ -650,6 +648,9 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zGF-hq-tJU">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&lt;"/>
+                                                                <connections>
+                                                                    <action selector="buttonPressed:" destination="Nsa-df-AY3" eventType="touchUpInside" id="d5C-xJ-Nnt"/>
+                                                                </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Systems Default" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y2x-T9-EzB">
                                                                 <rect key="frame" x="409.5" y="0.0" width="125" height="30"/>
@@ -660,6 +661,9 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ca6-jO-H2z">
                                                                 <rect key="frame" x="914" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&gt;"/>
+                                                                <connections>
+                                                                    <action selector="buttonPressed:" destination="Nsa-df-AY3" eventType="touchUpInside" id="n9M-Rc-m1B"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -680,6 +684,9 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GNh-3g-tDW">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&lt;"/>
+                                                                <connections>
+                                                                    <action selector="buttonPressed:" destination="Nsa-df-AY3" eventType="touchUpInside" id="rwg-Kz-80o"/>
+                                                                </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="44100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmj-2D-1dG">
                                                                 <rect key="frame" x="447.5" y="0.0" width="49.5" height="30"/>
@@ -690,6 +697,9 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldZ-yu-gyi">
                                                                 <rect key="frame" x="914" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&gt;"/>
+                                                                <connections>
+                                                                    <action selector="buttonPressed:" destination="Nsa-df-AY3" eventType="touchUpInside" id="4cZ-Xs-kpV"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -710,6 +720,9 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="04N-Yf-vHz">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&lt;"/>
+                                                                <connections>
+                                                                    <action selector="buttonPressed:" destination="Nsa-df-AY3" eventType="touchUpInside" id="RfP-Pm-WKe"/>
+                                                                </connections>
                                                             </button>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="512" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hv-61-5qB">
                                                                 <rect key="frame" x="458" y="0.0" width="28" height="30"/>
@@ -720,6 +733,9 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9sX-cQ-UNm">
                                                                 <rect key="frame" x="914" y="0.0" width="30" height="30"/>
                                                                 <state key="normal" title="&gt;"/>
+                                                                <connections>
+                                                                    <action selector="buttonPressed:" destination="Nsa-df-AY3" eventType="touchUpInside" id="92o-fM-LaB"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -750,6 +766,17 @@
                         <viewLayoutGuide key="safeArea" id="veB-ae-2Us"/>
                     </view>
                     <navigationItem key="navigationItem" id="Mke-6P-Iyh"/>
+                    <connections>
+                        <outlet property="bufSizeLabel" destination="8hv-61-5qB" id="Xlq-U1-G1o"/>
+                        <outlet property="engineLabel" destination="Y2x-T9-EzB" id="1l3-B5-dl8"/>
+                        <outlet property="left1Button" destination="zGF-hq-tJU" id="WhA-xw-qEO"/>
+                        <outlet property="left2Button" destination="GNh-3g-tDW" id="rhg-GO-RJd"/>
+                        <outlet property="left3Button" destination="04N-Yf-vHz" id="eia-xo-8Za"/>
+                        <outlet property="right1Button" destination="Ca6-jO-H2z" id="RAY-VX-ppf"/>
+                        <outlet property="right2Button" destination="ldZ-yu-gyi" id="wAn-kF-Hnb"/>
+                        <outlet property="right3Button" destination="9sX-cQ-UNm" id="rbc-6t-2PV"/>
+                        <outlet property="sampleRateLabel" destination="hmj-2D-1dG" id="cbL-tT-532"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MBR-JP-C1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
