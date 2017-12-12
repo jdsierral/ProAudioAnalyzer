@@ -27,6 +27,11 @@ class SpectrumAnalyzer : AudioAnalyzer {
         }
     }
 
+    deinit {
+        lBuf.deallocate(capacity: Int(bufSize))
+        rBuf.deallocate(capacity: Int(bufSize))
+    }
+
     override func initialize() {
         lSpectrum = MagnitudeSpectrum(name: "Left", fftSize: bufSize, sampleRate: sampleRate)
         rSpectrum = MagnitudeSpectrum(name: "Rigth", fftSize: bufSize, sampleRate: sampleRate)

@@ -33,6 +33,11 @@ class TransferFunctionAnalyzer: AudioAnalyzer {
         refBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(bufSize))
     }
 
+    deinit {
+        srcBuf.deallocate(capacity: Int(bufSize))
+        refBuf.deallocate(capacity: Int(bufSize))
+    }
+
     override func process(leftInput: Float, rightInput: Float) {
         srcBuf[writePos] = Double(leftInput)
         refBuf[writePos] = Double(rightInput)

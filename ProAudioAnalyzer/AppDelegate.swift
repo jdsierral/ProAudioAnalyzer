@@ -14,7 +14,7 @@ let DBG = true
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private let sampleRate = 44100.0
-    private let bufSize: UInt32 = 32
+    private let bufSize: UInt32 = 512
     var window: UIWindow?
     var audioController: AVAudioController!
 
