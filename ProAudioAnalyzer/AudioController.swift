@@ -20,7 +20,7 @@ class AVAudioController {
     var bufSize: UInt32 {
         set { configureAudioSession(sampleRate: sampleRate, bufSize: newValue) }
         get { let size = UInt32(session.ioBufferDuration * sampleRate)
-            return size.nextPowOf2
+            return size.isPowOf2 ? size : size.nextPowOf2
         }
     }
 
@@ -63,18 +63,19 @@ class AVAudioController {
         output = engine.outputNode
         mixer = engine.mainMixerNode
         engine.connect(input, to: mixer, format: input.outputFormat(forBus: 0))
+        mixer.outputVolume = 0.0
     }
 
     func initializeAudioSession(sampleRate: Double, bufSize: UInt32) {
         do {
             try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
             try session.setCategory(AVAudioSessionCategoryPlayAndRecord, mode: AVAudioSessionModeMeasurement, options: AVAudioSessionCategoryOptions.interruptSpokenAudioAndMixWithOthers)
-            configureAudioSession(sampleRate: sampleRate, bufSize: bufSize)
             session.requestRecordPermission({ (success) in
                 if success { print("Permission Granted") } else {
                     print("Permission Denied")
                 }
             })
+            configureAudioSession(sampleRate: sampleRate, bufSize: bufSize)
         }    catch    {
             print("Audio session not loaded properly \(error)")
         }
@@ -87,9 +88,9 @@ class AVAudioController {
                 if (port.channels?.count ?? 0) > 1 {
                     print(port)
                     try session.setPreferredInput(port)
+                    try session.setPreferredInputNumberOfChannels(2)
                 }
             }
-            try session.setPreferredInputNumberOfChannels(2)
             try session.setPreferredSampleRate(sampleRate)
             try session.setPreferredIOBufferDuration(Double(bufSize)/sampleRate)
         } catch {
@@ -97,8 +98,16 @@ class AVAudioController {
         }
     }
 
-    func terminateAudioSession() {
+    func restartAudioSession() {
+        terminateAudioSession()
+        initializeAudioSession(sampleRate: sampleRate, bufSize: bufSize)
+        engine = AVAudioEngine()
+        configureAudioEngine()
+        runAudioEngine()
+    }
 
+    func terminateAudioSession() {
+		stopAudioEngine()
     }
 
     func printAudioConfiguration() {
@@ -155,6 +164,7 @@ extension AVAudioController {
 extension UInt32 {
     var nextPowOf2: UInt32 {
 		var x = self
+        if x == 0 { return x }
         x -= 1
         x |= x >> 1
         x |= x >> 2
@@ -164,5 +174,11 @@ extension UInt32 {
 		x += 1
         return x
         // Taken from bit Twiddling hacks page
+    }
+
+    var isPowOf2: Bool {
+        var x = self
+        x |= x-1
+        return 0 == x
     }
 }

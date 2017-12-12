@@ -12,7 +12,7 @@ class ValueHolder {
     private var state = 0.0 { didSet { counter = counterLenght } }
     private var counter = 0
     var counterLenght = 0
-    var isOnHold: Bool { return counter == 0 }
+    var isOnHold: Bool { return counter > 0 }
     var value: Double { return state }
     var isClip: Bool { return state > 0.9885530947} // ref -0.1 dB
 
@@ -25,7 +25,7 @@ class ValueHolder {
 
     func tick(_ newValue: Double) {
         if isOnHold { counter -= 1 } else { state = 0 }
-        state = max(state, fabs(newValue) )
+        if fabs(newValue) > state { state = fabs(newValue) }
     }
 }
 

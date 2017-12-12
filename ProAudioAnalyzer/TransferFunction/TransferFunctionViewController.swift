@@ -10,26 +10,49 @@ import UIKit
 
 class TransferFunctionViewController: UIAnalyzerViewController {
 
+
+    var analyzer: TranferFunctionAnalyzer!
+
+
+    @IBOutlet weak var magSpectrumView: UIView!
+    @IBOutlet weak var phaSpectrumView: UIView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+//        analyzer = TransferFunctionAnalyzer(controler: avController)
+//
+//        let fftSize = Int(avController.bufSize)
+//        magSpectrumView.initializeMemoryForPlot(forSize: fftSize)
+//        magSpectrumView.initializeMemoryForPlot(forSize: fftSize)
+//        setSpectrumViewNormalBins()
+//        magSpectrumView.fftSize = fftSize
+//        phaSpectrumView.fftSize = fftSize
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func updateGUI() {
+
     }
-    
 
-    /*
-    // MARK: - Navigation
+//    func setSpectrumViewNormalBins() {
+//        var linNormBins = ( 0..<Int(analyzer.bufSize)).map{ Double($0)/(Double(analyzer.bufSize)) }
+//        let min = linNormBins[1]
+//        let max = 1.0
+//        let logBins = linNormBins.map{ log(($0 + min)/min) / log(max/min) }
+//
+//        lSpectrumView.setNormLogBins(logBins)
+//        rSpectrumView.setNormLogBins(logBins)
+//    }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func segueToConfigView() {
+        performSegue(withIdentifier: "SegueToTransferFunctionsConfig", sender: nil) // AudioAnalyzerSettings
     }
-    */
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        analyzer.removeTap()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
 }

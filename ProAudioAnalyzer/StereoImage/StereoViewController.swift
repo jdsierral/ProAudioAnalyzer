@@ -10,15 +10,35 @@ import UIKit
 
 class StereoViewController: UIAnalyzerViewController {
 
+    var analyzer: StereoImageAnalyzer!
+
+    @IBOutlet weak var lissajousView: LissajousView!
+    @IBOutlet weak var phaseMeterView: PhaseMeterView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        analyzer = StereoImageAnalyzer(controller: avController)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func updateGUI() {
+        let vals = analyzer.phaseMeter.getCurrentPhaseValues()
+        let XY = analyzer.goniometer.getCurrentvalues()
+        phaseMeterView.setValue(vals)
+        lissajousView.setValue(x: CGFloat(XY.l), y: CGFloat(XY.r))
+    }
+
+    override func segueToConfigView() {
+        performSegue(withIdentifier: "SegueToStereoImagesConfig", sender: nil)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        analyzer.removeTap()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        analyzer.runPerSample()
     }
     
 

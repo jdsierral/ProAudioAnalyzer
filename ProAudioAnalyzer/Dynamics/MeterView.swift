@@ -10,10 +10,16 @@ import UIKit
 
 class MeterView: UIView {
 
-    func setDynamics(newValues: Dynamics) { bar.setDynamics(newValues) }
+    func setDynamics(values: SignalDynamics) {
+        bar.setDynamics(values)
+        if label.text == String() {
+            configureLabel()
+        }
+    }
 
-    var bar     = MeterBarView()
-    var ticks     = MeterTicksView()
+    var bar		= MeterBarView()
+    var ticks   = MeterTicksView()
+    var label   = UILabel()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,15 +29,37 @@ class MeterView: UIView {
         ticks.backgroundColor = UIColor.clear
         bar.isOpaque = false
         ticks.isOpaque = false
+
+        configureLabel()
+
         addSubview(bar)
         addSubview(ticks)
+
+    }
+
+    func configureLabel() {
+        label.text = bar.dynamics.name
+        label.sizeToFit()
+        addSubview(label)
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        bar.frame = CGRect(x: bounds.origin.x, y: bounds.origin.y, width: bounds.width * 0.7, height: bounds.height)
 
-        ticks.frame = CGRect(x: bounds.origin.x + bounds.width * 0.75, y: bounds.origin.y, width: bounds.width * 0.25, height: bounds.height)
+        let sizeClass = traitCollection.horizontalSizeClass
+
+        if sizeClass == .regular {
+            let meterFrame = bounds.topFrac(by: 0.9)
+            bar.frame = meterFrame.leftFrac(by: 0.7).zoom(by: 0.9)
+            ticks.frame = meterFrame.rightFrac(by: 0.3).zoom(by: 0.9)
+            label.frame.origin = CGPoint(x: meterFrame.midX - label.frame.width/2.0, y: meterFrame.maxY)
+        } else if sizeClass == .compact {
+			let meterFrame = bounds.leftFrac(by: 0.9)
+            bar.frame = meterFrame.topFrac(by: 0.7).zoom(by: 0.9)
+            ticks.frame = meterFrame.bottomFrac(by: 0.3).zoom(by: 0.9)
+            label.frame.origin = CGPoint(x: meterFrame.maxX, y: meterFrame.midY - label.frame.height/2.0)
+        }
+        ticks.setNeedsDisplay()
     }
 }
 
@@ -56,6 +84,34 @@ extension CGRect {
         let newWidth = width * scale
         let newHeight = height * scale
         return insetBy(dx: (width - newWidth)/2, dy: (height - newHeight)/2)
+    }
+
+    func zoom(byX xScale: CGFloat, byY yScale: CGFloat) -> CGRect {
+        let newWidth = width * xScale
+        let newHeight = height * yScale
+        return insetBy(dx: (width - newWidth)/2, dy: (height - newHeight)/2)
+    }
+
+    func leftFrac(by frac: CGFloat) -> CGRect {
+		let newWidth = width * frac
+        return CGRect(origin: origin, size: CGSize(width: newWidth, height: height))
+    }
+
+    func topFrac(by frac: CGFloat) -> CGRect {
+        let newHeight = height * frac
+        return CGRect(origin: origin, size: CGSize(width: width, height: newHeight))
+    }
+
+    func rightFrac(by frac: CGFloat) -> CGRect {
+        let newWidth = width * frac
+        let newOrigin = origin.offsetBy(dx: width * (1.0 - frac), dy: 0.0)
+        return CGRect(origin: newOrigin, size: CGSize(width: newWidth, height: height))
+    }
+
+    func bottomFrac(by frac: CGFloat) -> CGRect {
+		let newHeight = height * frac
+        let newOrigin = origin.offsetBy(dx: 0.0, dy: height * (1.0 - frac))
+        return CGRect(origin: newOrigin, size: CGSize(width: width, height: newHeight))
     }
 }
 

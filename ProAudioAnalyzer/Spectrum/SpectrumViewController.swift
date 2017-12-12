@@ -10,26 +10,59 @@ import UIKit
 
 class SpectrumViewController: UIAnalyzerViewController {
 
+    var analyzer: SpectrumAnalyzer!
+
+    @IBOutlet weak var lSpectrumView: SpectrumView!
+    @IBOutlet weak var rSpectrumView: SpectrumView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        analyzer = SpectrumAnalyzer(controller: avController)
 
-        // Do any additional setup after loading the view.
+        let fftSize = Int(avController.bufSize)
+        lSpectrumView.initializeMemoryForPlot(forSize: fftSize)
+        rSpectrumView.initializeMemoryForPlot(forSize: fftSize)
+        setSpectrumViewNormalBins()
+        lSpectrumView.fftSize = fftSize
+        rSpectrumView.fftSize = fftSize
+
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func updateGUI() {
+        analyzer.lSpectrum.triggerUpdate {
+            let ptr = lSpectrumView.mags!
+            analyzer.lSpectrum.dumpData(ptr: ptr)
+            lSpectrumView.setNeedsDisplay()
+        }
+        analyzer.rSpectrum.triggerUpdate {
+            let ptr = rSpectrumView.mags!
+            analyzer.rSpectrum.dumpData(ptr: ptr)
+            rSpectrumView.setNeedsDisplay()
+        }
     }
-    
 
-    /*
-    // MARK: - Navigation
+    func setSpectrumViewNormalBins() {
+        var linNormBins = ( 0..<Int(analyzer.bufSize)).map{ Double($0)/(Double(analyzer.bufSize)) }
+        let min = linNormBins[1]
+        let max = 1.0
+        let logBins = linNormBins.map{ log(($0 + min)/min) / log(max/min) }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        lSpectrumView.setNormLogBins(logBins)
+        rSpectrumView.setNormLogBins(logBins)
     }
-    */
 
+
+    override func segueToConfigView() {
+        performSegue(withIdentifier: "SegueToSpectrumsConfig", sender: nil)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        analyzer.removeTap()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        analyzer.runPerSample()
+    }
 }

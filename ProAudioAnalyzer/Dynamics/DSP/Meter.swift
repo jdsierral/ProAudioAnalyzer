@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct Dynamics {
+
+struct SignalDynamics {
     var name: String
     var peakValue: Double
     var rmsValue: Double
@@ -20,38 +21,42 @@ struct Dynamics {
 }
 
 class Meter {
-    var fs: Double
+
+    public static var settings = DefaultSettings.defaultMeterSettings
+    static var useAESstddB = DefaultSettings.useAESstddB
+
+    var ID: String
     var peak = PeakTracker()
     var rms  = RMSTracker()
     var vu   = VUTracker()
     var clipHolder = ValueHolder()
     var ispHolder = ISPHolder()
-    var useAESstdRMS = true
     var dbManager = DecibelManager()
-    var ID: String
 
-    func initialize() {
-        peak.setAttack(0.001, sampleRate: fs)
-        peak.setRelease(1.0, sampleRate: fs)
-        peak.holder.setTime(-1, sampleRate: fs)
 
-        rms.setTime(0.1, sampleRate: fs)
-        rms.holder.setTime(1.0, sampleRate: fs)
-
-        vu.setTime(0.3, sampleRate: fs)
-        vu.holder.setTime(1.0, sampleRate: fs)
-
-        clipHolder.setTime(5.0, sampleRate: fs)
-        ispHolder.setTime(1.0, sampleRate: fs)
-
-        dbManager.loadDefaults()
+    init(name id: String) {
+        ID = id
     }
 
-    init(sampleRate: Double, withName name: String = String()) {
-        fs = sampleRate
-        ID = name
+    func initialize(sampleRate fs: Double) {
+        peak.reset()
+        rms.reset()
+        vu.reset()
+        clipHolder.reset()
+        ispHolder.reset()
 
-        initialize()
+        peak.setAttack(Meter.settings.peakAttackTime, sampleRate: fs)
+        peak.setRelease(Meter.settings.peakReleaseTime, sampleRate: fs)
+		peak.holder.setTime(Meter.settings.peakHolderTime, sampleRate: fs)
+
+        rms.setTime(Meter.settings.rmsTime, sampleRate: fs)
+        rms.holder.setTime(Meter.settings.rmsHolderTime, sampleRate: fs)
+
+        vu.setTime(Meter.settings.vuTime, sampleRate: fs)
+        vu.holder.setTime(Meter.settings.vuHolderTime, sampleRate: fs)
+
+        clipHolder.setTime(Meter.settings.clipHolderTime, sampleRate: fs)
+        ispHolder.setTime(Meter.settings.ispHolderTime, sampleRate: fs)
     }
 
     func process(input: Double) {
@@ -61,15 +66,40 @@ class Meter {
         clipHolder.tick(input)
     }
 
-    func getCurrentValues() -> Dynamics {
-		let values = Dynamics(name: ID,
-                              peakValue: dbManager.normalizedDb(db: dbManager.mag2dB(mag: peak.value)),
-                              rmsValue: dbManager.normalizedDb(db: dbManager.mag2dB(mag: rms.value)),
-                              vuValue: dbManager.normalizedDb(db: dbManager.mag2dB(mag: vu.value)),
-                              peakMax: dbManager.mag2dB(mag: peak.holder.value),
-                              rmsMax: dbManager.mag2dB(mag: rms.holder.value),
-                              ispMax: dbManager.mag2dB(mag: vu.value),
-                              clip: clipHolder.isClip)
+    /////////////////////////////////////////////////////////////////////////
+
+
+    func getCurrentRawValues() -> SignalDynamics {
+		let values = SignalDynamics(name: ID,
+                                    peakValue: peak.value,
+                                    rmsValue: (Meter.useAESstddB ? rms.value * sqrt(2.0) : rms.value),
+                                    vuValue: vu.value,
+                                    peakMax: peak.holder.value,
+                                    rmsMax: rms.holder.value,
+                                    ispMax: vu.holder.value,
+                                    clip: clipHolder.isClip)
+        return values
+    }
+
+    func getCurrentdBValues() -> SignalDynamics {
+		var values = getCurrentRawValues()
+        values.peakValue = dB.mag2dB(mag: values.peakValue)
+        values.rmsValue = dB.mag2dB(mag: values.rmsValue)
+        values.vuValue = dB.mag2dB(mag: values.vuValue)
+        values.peakMax = dB.mag2dB(mag: values.peakMax)
+        values.rmsMax = dB.mag2dB(mag: values.rmsMax)
+        values.ispMax = dB.mag2dB(mag: values.ispMax)
 		return values
+    }
+
+    func getCurrentNormalizedValues() -> SignalDynamics {
+		var values = getCurrentdBValues()
+        values.peakValue = dB.norm(dB: values.peakValue)
+        values.rmsValue = dB.norm(dB: values.rmsValue)
+        values.vuValue = dB.norm(dB: values.vuValue)
+        values.peakMax = dB.norm(dB: values.peakMax)
+        values.rmsMax = dB.norm(dB: values.rmsMax)
+        values.ispMax = dB.norm(dB: values.ispMax)
+        return values
     }
 }

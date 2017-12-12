@@ -10,21 +10,32 @@ import Foundation
 import AVFoundation
 
 
+
 class AudioAnalyzer {
     var audioController: AVAudioController!
 
+    var sampleRate: Double { return audioController.sampleRate }
+    var bufSize: UInt32 { return audioController.bufSize }
+
+    init(controller: AVAudioController) {
+        audioController = controller
+        initialize()
+    }
+
     func runPerSample() {
-    	stop()
         installSampleTap()
     }
 
     func runPerBuffer() {
-        stop()
         installBufferTap()
     }
 
     func stop() {
         removeTap()
+    }
+
+    func initialize() {
+        assertionFailure("Function must be overriden")
     }
 
     func installSampleTap() {
@@ -36,21 +47,22 @@ class AudioAnalyzer {
 				let data = buffer.floatChannelData!
                 let bufSize = Int(buffer.frameLength)
                 for i in 0..<bufSize {
-                    self.process(leftInput: data[0][1], rightInput: data[1][i])
+                    self.process(leftInput: data[0][i], rightInput: data[1][i])
                 }
-                if DBG {print("AC BufSize is: \(self.audioController.bufSize)")
-                        print("used buffer Size is \(bufSize)")
-                }
+//                if DBG {print("AC BufSize is: \(self.audioController.bufSize)")
+//                        print("used buffer Size is \(bufSize)")
+//                }
             })
         } else {
             input.installTap(onBus: 0, bufferSize: audioController.bufSize, format: format, block: { (buffer, timeStamp) in
                 let data = buffer.floatChannelData!
                 let bufSize = Int(buffer.frameLength)
                 for i in 0..<bufSize {
-                    self.process(leftInput: data[0][1], rightInput: data[0][i])
+                    self.process(leftInput: data[0][i], rightInput: data[0][i])
                 }
             })
         }
+        if DBG { print("Tap Installed") }
     }
 
     func installBufferTap() {
@@ -71,6 +83,7 @@ class AudioAnalyzer {
 
     func removeTap() {
         audioController.input.removeTap(onBus: 0)
+        if DBG { print("Tap Removed") }
     }
 
     func process(leftInput: Float, rightInput: Float) {
