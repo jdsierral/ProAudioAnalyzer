@@ -29,10 +29,10 @@ class AVAudioController {
     }
 
     var session: AVAudioSession
-    var engine: AVAudioEngine!
-    var input: AVAudioInputNode!
-    var output: AVAudioOutputNode!
-    var mixer: AVAudioMixerNode!
+    var engine:  AVAudioEngine!
+    var input:   AVAudioInputNode!
+    var output:  AVAudioOutputNode!
+    var mixer:   AVAudioMixerNode!
 
     init(sampleRate: Double, bufSize: UInt32) {
         session = AVAudioSession.sharedInstance()

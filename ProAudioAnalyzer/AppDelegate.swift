@@ -15,8 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private let sampleRate = 44100.0
     private let bufSize: UInt32 = 512
-    var window: UIWindow?
     var audioController: AVAudioController!
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 

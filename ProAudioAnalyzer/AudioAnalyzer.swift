@@ -35,7 +35,7 @@ class AudioAnalyzer {
     }
 
     func initialize() {
-        assertionFailure("Function must be overriden")
+        assertionFailure("Function must be overridden")
     }
 
     func installSampleTap() {
