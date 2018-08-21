@@ -32,9 +32,6 @@
 		2C854D3F1FDF6DED0050E5CB /* ComplexSpectrum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C854D3E1FDF6DED0050E5CB /* ComplexSpectrum.swift */; };
 		2C854D411FDF6E0A0050E5CB /* PhaseSpectrum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C854D401FDF6E0A0050E5CB /* PhaseSpectrum.swift */; };
 		2CA57D7A1FDF8889004B77A2 /* TransferFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA57D791FDF8889004B77A2 /* TransferFunction.swift */; };
-		2CA57D7C1FDF9F56004B77A2 /* StereoConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA57D7B1FDF9F56004B77A2 /* StereoConfigViewController.swift */; };
-		2CA57D7E1FDF9F8A004B77A2 /* SpectrumConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA57D7D1FDF9F8A004B77A2 /* SpectrumConfigViewController.swift */; };
-		2CA57D801FDF9FBC004B77A2 /* TransferFunctionConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA57D7F1FDF9FBC004B77A2 /* TransferFunctionConfigViewController.swift */; };
 		2CBF50B41FDD3D9C000168FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50B31FDD3D9C000168FA /* AppDelegate.swift */; };
 		2CBF50B91FDD3D9C000168FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF50B71FDD3D9C000168FA /* Main.storyboard */; };
 		2CBF50BB1FDD3D9C000168FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CBF50BA1FDD3D9C000168FA /* Assets.xcassets */; };
@@ -44,10 +41,8 @@
 		2CBF50CE1FDD4580000168FA /* SpectrumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50CD1FDD4580000168FA /* SpectrumViewController.swift */; };
 		2CBF50D01FDD459E000168FA /* StereoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50CF1FDD459E000168FA /* StereoViewController.swift */; };
 		2CBF50D21FDD45BD000168FA /* TransferFunctionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50D11FDD45BD000168FA /* TransferFunctionViewController.swift */; };
-		2CBF50D51FDD4608000168FA /* ConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50D41FDD4608000168FA /* ConfigViewController.swift */; };
-		2CBF50D71FDD6A11000168FA /* AnalyzerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50D61FDD6A11000168FA /* AnalyzerViewController.swift */; };
 		2CBF50D91FDD6A6C000168FA /* AudioAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBF50D81FDD6A6C000168FA /* AudioAnalyzer.swift */; };
-		2CC6341B1FDE66E000400401 /* DynamicsConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC6341A1FDE66E000400401 /* DynamicsConfigViewController.swift */; };
+		2CCF213D212C146100C96420 /* AnalyzerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCF213C212C146100C96420 /* AnalyzerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,9 +71,6 @@
 		2C854D3E1FDF6DED0050E5CB /* ComplexSpectrum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexSpectrum.swift; sourceTree = "<group>"; };
 		2C854D401FDF6E0A0050E5CB /* PhaseSpectrum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseSpectrum.swift; sourceTree = "<group>"; };
 		2CA57D791FDF8889004B77A2 /* TransferFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFunction.swift; sourceTree = "<group>"; };
-		2CA57D7B1FDF9F56004B77A2 /* StereoConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StereoConfigViewController.swift; path = ProAudioAnalyzer/StereoImage/StereoConfigViewController.swift; sourceTree = SOURCE_ROOT; };
-		2CA57D7D1FDF9F8A004B77A2 /* SpectrumConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SpectrumConfigViewController.swift; path = ProAudioAnalyzer/Spectrum/SpectrumConfigViewController.swift; sourceTree = SOURCE_ROOT; };
-		2CA57D7F1FDF9FBC004B77A2 /* TransferFunctionConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TransferFunctionConfigViewController.swift; path = ProAudioAnalyzer/TransferFunction/TransferFunctionConfigViewController.swift; sourceTree = SOURCE_ROOT; };
 		2CBF50B01FDD3D9C000168FA /* ProAudioAnalyzer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProAudioAnalyzer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CBF50B31FDD3D9C000168FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CBF50B81FDD3D9C000168FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -90,10 +82,8 @@
 		2CBF50CD1FDD4580000168FA /* SpectrumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumViewController.swift; sourceTree = "<group>"; };
 		2CBF50CF1FDD459E000168FA /* StereoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StereoViewController.swift; sourceTree = "<group>"; };
 		2CBF50D11FDD45BD000168FA /* TransferFunctionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFunctionViewController.swift; sourceTree = "<group>"; };
-		2CBF50D41FDD4608000168FA /* ConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewController.swift; sourceTree = "<group>"; };
-		2CBF50D61FDD6A11000168FA /* AnalyzerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnalyzerViewController.swift; path = ProAudioAnalyzer/AnalyzerViewController.swift; sourceTree = SOURCE_ROOT; };
 		2CBF50D81FDD6A6C000168FA /* AudioAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AudioAnalyzer.swift; path = ProAudioAnalyzer/AudioAnalyzer.swift; sourceTree = SOURCE_ROOT; };
-		2CC6341A1FDE66E000400401 /* DynamicsConfigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicsConfigViewController.swift; sourceTree = "<group>"; };
+		2CCF213C212C146100C96420 /* AnalyzerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnalyzerViewController.swift; path = ProAudioAnalyzer/AnalyzerViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,15 +162,14 @@
 			children = (
 				2C4F34BE1FDDFE4500DB82DA /* DefaultSettings.swift */,
 				2CBF50C51FDD3E35000168FA /* AudioController.swift */,
+				2CCF213C212C146100C96420 /* AnalyzerViewController.swift */,
 				2CBF50B31FDD3D9C000168FA /* AppDelegate.swift */,
-				2CBF50D61FDD6A11000168FA /* AnalyzerViewController.swift */,
 				2CBF50D81FDD6A6C000168FA /* AudioAnalyzer.swift */,
 				2C4F34AF1FDDE6A700DB82DA /* DecibelManager.swift */,
 				2CBF50C71FDD3E8B000168FA /* Dynamics */,
 				2CBF50C81FDD3E91000168FA /* Spectrum */,
 				2CBF50C91FDD3E9B000168FA /* StereoImage */,
 				2CBF50CA1FDD3EAE000168FA /* TransferFunction */,
-				2CBF50D31FDD45C7000168FA /* Config */,
 				2CBF50B71FDD3D9C000168FA /* Main.storyboard */,
 				2CBF50BA1FDD3D9C000168FA /* Assets.xcassets */,
 				2CBF50BC1FDD3D9C000168FA /* LaunchScreen.storyboard */,
@@ -193,7 +182,6 @@
 			isa = PBXGroup;
 			children = (
 				2CBF50CB1FDD451F000168FA /* DynamicsViewController.swift */,
-				2CC6341A1FDE66E000400401 /* DynamicsConfigViewController.swift */,
 				2C4F34B81FDDE6C100DB82DA /* MeterBarView.swift */,
 				2C4F34BA1FDDE6C200DB82DA /* MeterTicksView.swift */,
 				2C4F34B91FDDE6C100DB82DA /* MeterView.swift */,
@@ -207,7 +195,6 @@
 			children = (
 				2CBF50CD1FDD4580000168FA /* SpectrumViewController.swift */,
 				2C36BAD61FDEB76F009A236D /* SpectrumView.swift */,
-				2CA57D7D1FDF9F8A004B77A2 /* SpectrumConfigViewController.swift */,
 				2C4F34A91FDDE68100DB82DA /* DSP */,
 			);
 			path = Spectrum;
@@ -216,7 +203,6 @@
 		2CBF50C91FDD3E9B000168FA /* StereoImage */ = {
 			isa = PBXGroup;
 			children = (
-				2CA57D7B1FDF9F56004B77A2 /* StereoConfigViewController.swift */,
 				2CBF50CF1FDD459E000168FA /* StereoViewController.swift */,
 				2C36BAE41FDF2923009A236D /* LissajousView.swift */,
 				2C36BAE81FDF475F009A236D /* CircularBuffer.swift */,
@@ -230,18 +216,9 @@
 			isa = PBXGroup;
 			children = (
 				2CBF50D11FDD45BD000168FA /* TransferFunctionViewController.swift */,
-				2CA57D7F1FDF9FBC004B77A2 /* TransferFunctionConfigViewController.swift */,
 				2C4F34AB1FDDE68E00DB82DA /* DSP */,
 			);
 			path = TransferFunction;
-			sourceTree = "<group>";
-		};
-		2CBF50D31FDD45C7000168FA /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				2CBF50D41FDD4608000168FA /* ConfigViewController.swift */,
-			);
-			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,7 +248,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0910;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = JuanSaudio;
 				TargetAttributes = {
 					2CBF50AF1FDD3D9C000168FA = {
@@ -319,9 +296,7 @@
 				2C4F34B51FDDE6A800DB82DA /* DecibelManager.swift in Sources */,
 				2C4F34BC1FDDE6C200DB82DA /* MeterView.swift in Sources */,
 				2C4F34BF1FDDFE4500DB82DA /* DefaultSettings.swift in Sources */,
-				2CA57D801FDF9FBC004B77A2 /* TransferFunctionConfigViewController.swift in Sources */,
 				2C36BAE71FDF2924009A236D /* PhaseMeterView.swift in Sources */,
-				2CA57D7C1FDF9F56004B77A2 /* StereoConfigViewController.swift in Sources */,
 				2CBF50D01FDD459E000168FA /* StereoViewController.swift in Sources */,
 				2C36BADD1FDEB8B4009A236D /* MagnitueSpectrum.swift in Sources */,
 				2C1B98951FDF7A6E000F6ABA /* Spectrum.swift in Sources */,
@@ -329,14 +304,12 @@
 				2C36BAE61FDF2924009A236D /* LissajousView.swift in Sources */,
 				2C36BAE21FDF290F009A236D /* SpatialAnalyzer.swift in Sources */,
 				2C4F34B61FDDE6A800DB82DA /* Trackers.swift in Sources */,
-				2CA57D7E1FDF9F8A004B77A2 /* SpectrumConfigViewController.swift in Sources */,
 				2C36BAE11FDF290F009A236D /* PhaseMeter.swift in Sources */,
 				2CA57D7A1FDF8889004B77A2 /* TransferFunction.swift in Sources */,
-				2CC6341B1FDE66E000400401 /* DynamicsConfigViewController.swift in Sources */,
-				2CBF50D51FDD4608000168FA /* ConfigViewController.swift in Sources */,
 				2CBF50C61FDD3E35000168FA /* AudioController.swift in Sources */,
 				2C4F34B41FDDE6A800DB82DA /* Meter.swift in Sources */,
 				2C854D411FDF6E0A0050E5CB /* PhaseSpectrum.swift in Sources */,
+				2CCF213D212C146100C96420 /* AnalyzerViewController.swift in Sources */,
 				2C854D3D1FDF6C000050E5CB /* TransferFunctionAnalyzer.swift in Sources */,
 				2C36BAD71FDEB76F009A236D /* SpectrumView.swift in Sources */,
 				2CBF50CC1FDD451F000168FA /* DynamicsViewController.swift in Sources */,
@@ -348,7 +321,6 @@
 				2C4F34BB1FDDE6C200DB82DA /* MeterBarView.swift in Sources */,
 				2CBF50B41FDD3D9C000168FA /* AppDelegate.swift in Sources */,
 				2C36BAE91FDF475F009A236D /* CircularBuffer.swift in Sources */,
-				2CBF50D71FDD6A11000168FA /* AnalyzerViewController.swift in Sources */,
 				2C36BADB1FDEB782009A236D /* FFT.swift in Sources */,
 				2C854D3F1FDF6DED0050E5CB /* ComplexSpectrum.swift in Sources */,
 				2CBF50D21FDD45BD000168FA /* TransferFunctionViewController.swift in Sources */,
@@ -393,6 +365,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -400,6 +373,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -450,6 +424,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -457,6 +432,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

@@ -18,7 +18,7 @@ class StereoImageAnalyzer: AudioAnalyzer {
         goniometer.initialize(sampleRate: sampleRate)
     }
 
-    override func process(leftInput: Float, rightInput: Float) {
+    override func process(leftInput: Double, rightInput: Double) {
         let l = Double(leftInput)
         let r = Double(rightInput)
         phaseMeter.process(leftInput: l, rightInput: r)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StereoViewController: UIAnalyzerViewController {
+class StereoViewController: AnalyzerViewController {
 
     var analyzer: StereoImageAnalyzer!
 
@@ -17,7 +17,17 @@ class StereoViewController: UIAnalyzerViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        analyzer = StereoImageAnalyzer(controller: avController)
+        analyzer = StereoImageAnalyzer(controller: audioController)
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        analyzer.run()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        analyzer.stop()
     }
 
     override func updateGUI() {
@@ -26,30 +36,5 @@ class StereoViewController: UIAnalyzerViewController {
         phaseMeterView.setValue(vals)
         lissajousView.setValue(x: CGFloat(XY.l), y: CGFloat(XY.r))
     }
-
-    override func segueToConfigView() {
-        performSegue(withIdentifier: "SegueToStereoImagesConfig", sender: nil)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        analyzer.removeTap()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        analyzer.runPerSample()
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

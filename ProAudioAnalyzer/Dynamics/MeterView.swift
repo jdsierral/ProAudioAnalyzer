@@ -8,9 +8,8 @@
 
 import UIKit
 
+@IBDesignable
 class MeterView: UIView {
-    
-
     func setDynamics(values: SignalDynamics) {
         bar.setDynamics(values)
         if label.text == String() {

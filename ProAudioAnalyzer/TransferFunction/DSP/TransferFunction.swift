@@ -52,9 +52,9 @@ class TransferFunction {
     }
 
     deinit {
-        tfComplex.realp.deallocate(capacity: 2 * fftSize)
-        tfMag.deallocate(capacity: fftSize)
-        tfPha.deallocate(capacity: fftSize)
+        tfComplex.realp.deallocate()
+        tfMag.deallocate()
+        tfPha.deallocate()
     }
 
     func computeTransferFunction(srcDataPtr: UnsafeMutablePointer<Double>, refDataPtr: UnsafeMutablePointer<Double>){
@@ -97,7 +97,7 @@ class TransferFunction {
     }
 
     func dumpData(magPtr: UnsafeMutableRawPointer, phaPtr: UnsafeMutableRawPointer) {
-        magPtr.copyBytes(from: tfMagdBNorm, count: fftSize)
-        phaPtr.copyBytes(from: tfPhaNorm, count: fftSize)
+        magPtr.copyMemory(from: tfMagdBNorm, byteCount: fftSize)
+        phaPtr.copyMemory(from: tfPhaNorm, byteCount: fftSize)
     }
 }

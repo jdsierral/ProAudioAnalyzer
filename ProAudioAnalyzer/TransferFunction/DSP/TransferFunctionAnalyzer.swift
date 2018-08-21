@@ -18,7 +18,7 @@ class TransferFunctionAnalyzer: AudioAnalyzer {
 
     private var writePos = 0 {
         didSet {
-            if writePos == bufSize {
+            if writePos == bufferSize {
                 transferFunction.computeTransferFunction(srcDataPtr: srcBuf, refDataPtr: refBuf)
                 writePos = 0
             }
@@ -27,18 +27,18 @@ class TransferFunctionAnalyzer: AudioAnalyzer {
 
     override func initialize() {
 
-		transferFunction = TransferFunction(fftSize: bufSize, sampleRate: sampleRate)
+		transferFunction = TransferFunction(fftSize: bufferSize, sampleRate: sampleRate)
 
-        srcBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(bufSize))
-        refBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(bufSize))
+        srcBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(bufferSize))
+        refBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(bufferSize))
     }
 
     deinit {
-        srcBuf.deallocate(capacity: Int(bufSize))
-        refBuf.deallocate(capacity: Int(bufSize))
+        srcBuf.deallocate()
+        refBuf.deallocate()
     }
 
-    override func process(leftInput: Float, rightInput: Float) {
+    override func process(leftInput: Double, rightInput: Double) {
         srcBuf[writePos] = Double(leftInput)
         refBuf[writePos] = Double(rightInput)
         writePos += 1

@@ -11,35 +11,17 @@ import AVFoundation
 
 class AVAudioController {
 
-    private var availableSampleRates: [Double] = [44100, 48000, 88200, 96000]
-    private var availableBufferSizes: [UInt32] = [64, 128, 256, 512, 1024]
+    var sampleRate: Double { return session.sampleRate }
+    var bufferSize: AVAudioFrameCount { return session.bufferSizeInSamples }
+    var input: AVAudioNode { return engine.inputNode }
 
-
-    var sampleRate: Double {
-        set { configureAudioSession(sampleRate: newValue,
-                                    bufSize: UInt32(session.ioBufferDuration * newValue))
-        }
-        get { return session.sampleRate }
-    }
-    var bufSize: UInt32 {
-        set { configureAudioSession(sampleRate: sampleRate, bufSize: newValue) }
-        get { let size = UInt32(session.ioBufferDuration * sampleRate)
-            return size.isPowOf2 ? size : size.nextPowOf2
-        }
-    }
-
-    var session: AVAudioSession
+    var session: AVAudioSession { return AVAudioSession.sharedInstance() }
     var engine:  AVAudioEngine!
-    var input:   AVAudioInputNode!
-    var output:  AVAudioOutputNode!
-    var mixer:   AVAudioMixerNode!
 
-    init(sampleRate: Double, bufSize: UInt32) {
-        session = AVAudioSession.sharedInstance()
-        initializeAudioSession(sampleRate: sampleRate, bufSize: bufSize)
-        engine = AVAudioEngine()
-        configureAudioEngine()
-        runAudioEngine()
+    init(sampleRate: Double, bufferSize: AVAudioFrameCount) {
+        initializeAudioSession()
+        configureAudioSession(sampleRate, bufferSize)
+        initializeAudioEngine()
         registerObservers()
         if DBG { printAudioConfiguration() }
     }
@@ -49,8 +31,58 @@ class AVAudioController {
         terminateAudioSession()
     }
 
+    func initializeAudioSession() {
+        do {
+            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, mode: AVAudioSessionModeMeasurement)
+            session.requestRecordPermission { (success) in
+                if success {
+                    print("Permission Granted")
+                } else {
+                    print("Permission Denied")
+                }
+            }
+        }    catch    {
+            print("Audio session not loaded properly \(error)")
+        }
+    }
+
+    func configureAudioSession() {
+        configureAudioSession(48000, AVAudioFrameCount(512))
+    }
+
+    func configureAudioSession(_ sampleRate: Double, _ bufferSize: AVAudioFrameCount) {
+        do {
+            let portDescriptions = session.availableInputs!
+            for port in portDescriptions {
+                if (port.channels?.count ?? 0) > 1 {
+                    print(port)
+                    try session.setPreferredInput(port)
+                    try session.setPreferredInputNumberOfChannels(2)
+                }
+            }
+            try session.setPreferredSampleRate( sampleRate )
+            try session.setPreferredIOBufferDuration( Double(bufferSize) / sampleRate )
+        } catch {
+            print("Couldnt configure Audio Session: \(error)")
+        }
+    }
+
+    func initializeAudioEngine() {
+        engine = AVAudioEngine()
+        let audioFormat: AVAudioFormat = engine.inputNode.outputFormat(forBus: 0)
+        engine.connect(engine.inputNode, to: engine.mainMixerNode, format: audioFormat)
+        engine.mainMixerNode.outputVolume = 0.0
+
+        DispatchQueue.global().async {
+            self.engine.prepare()
+            DispatchQueue.main.async {
+                self.runAudioEngine()
+            }
+        }
+    }
+
+
     func runAudioEngine() {
-        engine.prepare()
         do     {
             try engine.start()
         }    catch    {
@@ -62,52 +94,13 @@ class AVAudioController {
         engine.stop()
     }
 
-    func configureAudioEngine() {
-        input = engine.inputNode
-        output = engine.outputNode
-        mixer = engine.mainMixerNode
-        engine.connect(input, to: mixer, format: input.outputFormat(forBus: 0))
-        mixer.outputVolume = 0.0
-    }
-
-    func initializeAudioSession(sampleRate: Double, bufSize: UInt32) {
-        do {
-            try session.setCategory(AVAudioSessionCategoryPlayAndRecord)
-            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, mode: AVAudioSessionModeMeasurement, options: AVAudioSessionCategoryOptions.interruptSpokenAudioAndMixWithOthers)
-            session.requestRecordPermission({ (success) in
-                if success { print("Permission Granted") } else {
-                    print("Permission Denied")
-                }
-            })
-            configureAudioSession(sampleRate: sampleRate, bufSize: bufSize)
-        }    catch    {
-            print("Audio session not loaded properly \(error)")
-        }
-    }
-
-    func configureAudioSession(sampleRate: Double, bufSize: UInt32) {
-        do {
-            let portDescriptions = session.availableInputs!
-            for port in portDescriptions {
-                if (port.channels?.count ?? 0) > 1 {
-                    print(port)
-                    try session.setPreferredInput(port)
-                    try session.setPreferredInputNumberOfChannels(2)
-                }
-            }
-            try session.setPreferredSampleRate(sampleRate)
-            try session.setPreferredIOBufferDuration(Double(bufSize)/sampleRate)
-        } catch {
-            print("Audio Session Couldnt be setup: \(error)")
-        }
-    }
-
     func restartAudioSession() {
+        let currentSampleRate = sampleRate;
+        let currentBufferSize = bufferSize;
         terminateAudioSession()
-        initializeAudioSession(sampleRate: sampleRate, bufSize: bufSize)
-        engine = AVAudioEngine()
-        configureAudioEngine()
-        runAudioEngine()
+        initializeAudioSession()
+        configureAudioSession(currentSampleRate, currentBufferSize)
+        initializeAudioEngine()
     }
 
     func terminateAudioSession() {
@@ -116,13 +109,13 @@ class AVAudioController {
 
     func printAudioConfiguration() {
         print("SampleRate is: \(sampleRate)")
-        print("BufSize is: \(bufSize)")
+        print("Buffer Size is: \(bufferSize)")
         print("Current Route Inputs: \(session.currentRoute.inputs.map{$0.portName})")
         print("Current Route Outputs: \(session.currentRoute.outputs.map{$0.portName})")
         print("Available Inputs \(session.availableInputs!.map{ $0.portName })")
-        print("Number of Inputs: \(input.numberOfInputs)")
-        print("Input Formtat: \(input.inputFormat(forBus: 0))")
-        print("Number of Outputs: \(output.numberOfOutputs)")
+        print("Number of Inputs: \(engine.inputNode.numberOfInputs)")
+        print("Input Formtat: \(engine.inputNode.inputFormat(forBus: 0))")
+        print("Number of Outputs: \(engine.outputNode.numberOfOutputs)")
     }
 
     func registerObservers() {
@@ -134,10 +127,6 @@ class AVAudioController {
     func deregisterObservers() {
         // TODO
     }
-
-
-
-
 }
 
 extension AVAudioController {
@@ -145,8 +134,7 @@ extension AVAudioController {
         print("Audio Session Interrupted")
         stopAudioEngine()
         terminateAudioSession()
-        initializeAudioSession(sampleRate: sampleRate, bufSize: bufSize)
-        configureAudioEngine()
+        initializeAudioSession()
         runAudioEngine()
     }
 
@@ -154,8 +142,7 @@ extension AVAudioController {
         print("Audio Route Change")
         stopAudioEngine()
         terminateAudioSession()
-        initializeAudioSession(sampleRate: sampleRate, bufSize: bufSize)
-        configureAudioEngine()
+        initializeAudioSession()
         runAudioEngine()
     }
 
@@ -163,8 +150,7 @@ extension AVAudioController {
         print("Audio Engine Changed")
         stopAudioEngine()
         terminateAudioSession()
-        initializeAudioSession(sampleRate: sampleRate, bufSize: bufSize)
-        configureAudioEngine()
+        initializeAudioSession()
         runAudioEngine()
     }
 }
@@ -174,53 +160,11 @@ extension AVAudioController {
     func getCurrentEnginesName() -> String{
         return session.currentRoute.inputs.first?.portName ?? String()
     }
-
-    func selectNextAudioEngine() {
-		// TODO
-    }
-    func selectPreviousAudioEngine(){
-        // TODO
-    }
-    func selectNextSampleRate(){
-        if let idx = availableSampleRates.index(of: sampleRate) {
-            let newIdx = (idx + 1) % availableSampleRates.count
-            terminateAudioSession()
-            initializeAudioSession(sampleRate: availableSampleRates[newIdx], bufSize: bufSize)
-        } else {
-            terminateAudioSession()
-            initializeAudioSession(sampleRate: availableSampleRates[0], bufSize: bufSize)
-        }
-    }
-    func selectPreviousSampleRate(){
-        if let idx = availableSampleRates.index(of: sampleRate) {
-            let newIdx = (idx - 1 + availableSampleRates.count) % availableSampleRates.count
-            terminateAudioSession()
-            initializeAudioSession(sampleRate: availableSampleRates[newIdx], bufSize: bufSize)
-        } else {
-            terminateAudioSession()
-            initializeAudioSession(sampleRate: availableSampleRates[0], bufSize: bufSize)
-        }
-    }
-    func selectNextBufferSize(){
-        if let idx = availableBufferSizes.index(of: bufSize) {
-            let newIdx = (idx + 1) % availableBufferSizes.count
-            terminateAudioSession()
-            initializeAudioSession(sampleRate: sampleRate, bufSize: availableBufferSizes[newIdx])
-        } else {
-            terminateAudioSession()
-            initializeAudioSession(sampleRate: sampleRate, bufSize: availableBufferSizes[0])
-        }
-    }
-    func selectPreviousBufferSize(){
-        if let idx = availableBufferSizes.index(of: bufSize) {
-            let newIdx = (idx - 1 + availableBufferSizes.count) % availableBufferSizes.count
-            configureAudioSession(sampleRate: sampleRate, bufSize: availableBufferSizes[newIdx])
-        } else {
-            configureAudioSession(sampleRate: sampleRate, bufSize: availableBufferSizes[0])
-        }
-    }
 }
 
+extension AVAudioSession  {
+    var bufferSizeInSamples: AVAudioFrameCount { return AVAudioFrameCount(self.sampleRate * self.ioBufferDuration) }
+}
 
 extension UInt32 {
     var nextPowOf2: UInt32 {

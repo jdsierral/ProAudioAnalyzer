@@ -19,7 +19,7 @@ class SpectrumAnalyzer : AudioAnalyzer {
 
     private var writePos = 0 {
         didSet {
-            if writePos == bufSize {
+            if writePos == bufferSize {
                 lSpectrum.computeSpectrum(dataPtr: lBuf)
                 rSpectrum.computeSpectrum(dataPtr: rBuf)
                 writePos = 0
@@ -28,20 +28,20 @@ class SpectrumAnalyzer : AudioAnalyzer {
     }
 
     deinit {
-        lBuf.deallocate(capacity: Int(bufSize))
-        rBuf.deallocate(capacity: Int(bufSize))
+        lBuf.deallocate()
+        rBuf.deallocate()
     }
 
     override func initialize() {
-        lSpectrum = MagnitudeSpectrum(name: "Left", fftSize: bufSize, sampleRate: sampleRate)
-        rSpectrum = MagnitudeSpectrum(name: "Rigth", fftSize: bufSize, sampleRate: sampleRate)
-        lBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(bufSize))
-        rBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(bufSize))
+        lSpectrum = MagnitudeSpectrum(name: "Left", fftSize: bufferSize, sampleRate: sampleRate)
+        rSpectrum = MagnitudeSpectrum(name: "Rigth", fftSize: bufferSize, sampleRate: sampleRate)
+        lBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(bufferSize))
+        rBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(bufferSize))
     }
 
-    override func process(leftInput: Float, rightInput: Float) {
-        lBuf[writePos] = Double(leftInput)
-        rBuf[writePos] = Double(rightInput)
+    override func process(leftInput: Double, rightInput: Double) {
+        lBuf[writePos] = leftInput
+        rBuf[writePos] = rightInput
         writePos += 1
     }
 

@@ -25,10 +25,10 @@ class DynamicsAnalyzer : AudioAnalyzer {
         sMeter.initialize(sampleRate: sampleRate)
     }
     
-    override func process(leftInput: Float, rightInput: Float) {
+    override func process(leftInput: Double, rightInput: Double) {
 
-        let l = Double(leftInput)
-        let r = Double(rightInput)
+        let l = leftInput
+        let r = rightInput
         let m = (l + r) / 2
         let s = (l - r) / 2
 

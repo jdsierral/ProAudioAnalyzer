@@ -8,25 +8,33 @@
 
 import UIKit
 
-class TransferFunctionViewController: UIAnalyzerViewController {
-
+class TransferFunctionViewController: AnalyzerViewController {
 
     var analyzer: TransferFunctionAnalyzer!
-
 
     @IBOutlet weak var magSpectrumView: SpectrumView!
     @IBOutlet weak var phaSpectrumView: SpectrumView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        analyzer = TransferFunctionAnalyzer(controller: avController)
+        analyzer = TransferFunctionAnalyzer(controller: audioController)
 
-        let fftSize = Int(avController.bufSize)
+        let fftSize = Int(audioController.bufferSize)
         magSpectrumView.initializeMemoryForPlot(forSize: fftSize)
         phaSpectrumView.initializeMemoryForPlot(forSize: fftSize)
         setSpectrumViewNormalBins()
         magSpectrumView.fftSize = fftSize
         phaSpectrumView.fftSize = fftSize
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        analyzer.run()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        analyzer.stop()
     }
 
     override func updateGUI() {
@@ -40,26 +48,12 @@ class TransferFunctionViewController: UIAnalyzerViewController {
     }
 
     func setSpectrumViewNormalBins() {
-        var linNormBins = ( 0..<Int(analyzer.bufSize)).map{ Double($0)/(Double(analyzer.bufSize)) }
+        var linNormBins = ( 0..<Int(audioController.bufferSize)).map{ Double($0)/(Double(audioController.bufferSize)) }
         let min = linNormBins[1]
         let max = 1.0
         let logBins = linNormBins.map{ log(($0 + min)/min) / log(max/min) }
 
         magSpectrumView.setNormLogBins(logBins)
         phaSpectrumView.setNormLogBins(logBins)
-    }
-
-    override func segueToConfigView() {
-        performSegue(withIdentifier: "SegueToTransferFunctionsConfig", sender: nil) // AudioAnalyzerSettings
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        analyzer.removeTap()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        analyzer.runPerSample()
     }
 }

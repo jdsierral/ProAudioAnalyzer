@@ -1,51 +1,35 @@
 //
-//  AnalyzerController.swift
+//  AnalyzerViewController.swift
 //  ProAudioAnalyzer
 //
-//  Created by Juan David Sierra on 12/10/17.
-//  Copyright © 2017 JuanSaudio. All rights reserved.
+//  Created by Juan David Sierra on 8/21/18.
+//  Copyright © 2018 JuanSaudio. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
 
-class UIAnalyzerViewController: UIViewController {
-    var avController: AVAudioController { return (UIApplication.shared.delegate as! AppDelegate).audioController }
-	var timer = Timer()
-    var timerInterval: Double = 0.02
+class AnalyzerViewController: UIViewController {
 
-    @IBAction func EditButtonWasPressed(_ sender: UIBarButtonItem) {
-        segueToConfigView()
-    }
+    var audioController: AVAudioController { return (UIApplication.shared.delegate as! AppDelegate).audioController }
+//    var analyzer: AudioAnalyzer!
+    var timer = Timer()
+    let timerInterval = 0.02
 
-    func runTimer() {
+    func runGUITimer() {
         timer = Timer.scheduledTimer(withTimeInterval: timerInterval, repeats: true, block: { (timer) in
             self.updateGUI()
         })
-        if DBG { print("Timer Started") }
     }
 
-    func stopTimer() {
-        if DBG { print("Timer Stopped") }
+    func stopGUITimer() {
         timer.invalidate()
     }
 
     func updateGUI() {
-        assertionFailure("Must Override")
+        assertionFailure("Must override this function")
     }
 
-    func segueToConfigView() {
-        assertionFailure("Must Override")
-    }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        runTimer()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        stopTimer()
-    }
 }

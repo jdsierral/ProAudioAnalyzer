@@ -38,8 +38,8 @@ class FFT {
     }
 
     deinit {
-        complexPtr.deallocate(capacity: Int(fftSize))
-        windowPtr?.deallocate(capacity: Int(fftSize))
+        complexPtr.deallocate()
+        windowPtr?.deallocate()
         vDSP_destroy_fftsetupD(setup)
     }
 
@@ -50,14 +50,14 @@ class FFT {
             let tempBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(fftSize))
             vDSP_hamm_windowD(tempBuf, fftSize, 1)
             vDSP_vsmulD(tempBuf, 1, &fftFact, windowPtr!, 1, fftSize)
-            tempBuf.deallocate(capacity: Int(fftSize))
+            tempBuf.deallocate()
             //TODO: Implement correct Scaling for windowed FFT
         }
         if type == .hanning {
             let tempBuf = UnsafeMutablePointer<Double>.allocate(capacity: Int(fftSize))
             vDSP_hann_windowD(tempBuf, fftSize, Int32(vDSP_HANN_NORM))
             vDSP_vsmulD(tempBuf, 1, &fftFact, windowPtr!, 1, fftSize)
-            tempBuf.deallocate(capacity: Int(fftSize))
+            tempBuf.deallocate()
             //TODO: Implement correct Scaling for windowed FFT
         }
     }

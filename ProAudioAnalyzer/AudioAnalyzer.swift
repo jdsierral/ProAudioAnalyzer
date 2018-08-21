@@ -13,21 +13,16 @@ import AVFoundation
 
 class AudioAnalyzer {
     var audioController: AVAudioController!
-
     var sampleRate: Double { return audioController.sampleRate }
-    var bufSize: UInt32 { return audioController.bufSize }
+    var bufferSize: AVAudioFrameCount { return audioController.bufferSize }
 
     init(controller: AVAudioController) {
         audioController = controller
         initialize()
     }
 
-    func runPerSample() {
-        installSampleTap()
-    }
-
-    func runPerBuffer() {
-        installBufferTap()
+    func run() {
+        installTap()
     }
 
     func stop() {
@@ -38,46 +33,28 @@ class AudioAnalyzer {
         assertionFailure("Function must be overridden")
     }
 
-    func installSampleTap() {
-        let input = audioController.input!
+    func installTap() {
+        let input = audioController.input
         let format = input.inputFormat(forBus: 0)
 
         if format.channelCount > 1 {
-            input.installTap(onBus: 0, bufferSize: audioController.bufSize, format: format, block: { (buffer, timeStamp) in
+            input.installTap(onBus: 0, bufferSize: AVAudioFrameCount(audioController.bufferSize), format: format, block: { (buffer, timeStamp) in
 				let data = buffer.floatChannelData!
                 let bufSize = Int(buffer.frameLength)
                 for i in 0..<bufSize {
-                    self.process(leftInput: data[0][i], rightInput: data[1][i])
+                    self.process(leftInput: Double(data[0][i]), rightInput: Double(data[1][i]))
                 }
-//                if DBG {print("AC BufSize is: \(self.audioController.bufSize)")
-//                        print("used buffer Size is \(bufSize)")
-//                }
             })
         } else {
-            input.installTap(onBus: 0, bufferSize: audioController.bufSize, format: format, block: { (buffer, timeStamp) in
+            input.installTap(onBus: 0, bufferSize: audioController.bufferSize, format: format, block: { (buffer, timeStamp) in
                 let data = buffer.floatChannelData!
                 let bufSize = Int(buffer.frameLength)
                 for i in 0..<bufSize {
-                    self.process(leftInput: data[0][i], rightInput: data[0][i])
+                    self.process(leftInput: Double(data[0][i]), rightInput: Double(data[0][i]))
                 }
             })
         }
         if DBG { print("Tap Installed") }
-    }
-
-    func installBufferTap() {
-        let input = audioController.input!
-        let format = input.inputFormat(forBus: 0)
-
-        if format.channelCount > 1 {
-            input.installTap(onBus: 0, bufferSize: audioController.bufSize, format: format, block: { (buffer, timeStamp) in
-                self.process(block: buffer)
-            })
-        } else {
-            input.installTap(onBus: 0, bufferSize: audioController.bufSize, format: format, block: { (buffer, timeStamp) in
-                self.process(block: buffer)
-            })
-        }
     }
 
 
@@ -86,11 +63,7 @@ class AudioAnalyzer {
         if DBG { print("Tap Removed") }
     }
 
-    func process(leftInput: Float, rightInput: Float) {
-        assertionFailure("Function must be overriden")
-    }
-
-    func process(block: AVAudioPCMBuffer) {
+    func process(leftInput: Double, rightInput: Double) {
         assertionFailure("Function must be overriden")
     }
     

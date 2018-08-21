@@ -40,9 +40,9 @@ class MagnitudeSpectrum : Spectrum{
     }
 
     deinit {
-        spectrumMag.deallocate(capacity: fftSize)
-        spectrumMagdB.deallocate(capacity: fftSize)
-        spectrumMagdBNorm.deallocate(capacity: fftSize)
+        spectrumMag.deallocate()
+        spectrumMagdB.deallocate()
+        spectrumMagdBNorm.deallocate()
     }
 
     func computeSpectrum(dataPtr: UnsafeMutablePointer<Double>) {
@@ -64,7 +64,7 @@ class MagnitudeSpectrum : Spectrum{
     }
 
     override func dumpData(ptr: UnsafeMutableRawPointer) {
-        ptr.copyBytes(from: UnsafeRawPointer(spectrumMagdBNorm), count: fftSize * MemoryLayout<Double>.size)
+        ptr.copyMemory(from: UnsafeRawPointer(spectrumMagdBNorm), byteCount: fftSize * MemoryLayout<Double>.size)
     }
 
 

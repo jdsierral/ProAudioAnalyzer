@@ -8,7 +8,8 @@
 
 import UIKit
 
-class SpectrumViewController: UIAnalyzerViewController {
+class SpectrumViewController: AnalyzerViewController {
+
 
     var analyzer: SpectrumAnalyzer!
 
@@ -17,15 +18,26 @@ class SpectrumViewController: UIAnalyzerViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        analyzer = SpectrumAnalyzer(controller: avController)
+        analyzer = SpectrumAnalyzer(controller: audioController)
 
-        let fftSize = Int(avController.bufSize)
+        let fftSize = Int(audioController.bufferSize)
         lSpectrumView.initializeMemoryForPlot(forSize: fftSize)
         rSpectrumView.initializeMemoryForPlot(forSize: fftSize)
         setSpectrumViewNormalBins()
         lSpectrumView.fftSize = fftSize
         rSpectrumView.fftSize = fftSize
+    }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        analyzer.run()
+        runGUITimer()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        analyzer.stop()
+        stopGUITimer()
     }
 
     override func updateGUI() {
@@ -42,27 +54,12 @@ class SpectrumViewController: UIAnalyzerViewController {
     }
 
     func setSpectrumViewNormalBins() {
-        var linNormBins = ( 0..<Int(analyzer.bufSize)).map{ Double($0)/(Double(analyzer.bufSize)) }
+        var linNormBins = ( 0..<Int(analyzer.bufferSize)).map{ Double($0)/(Double(analyzer.bufferSize)) }
         let min = linNormBins[1]
         let max = 1.0
         let logBins = linNormBins.map{ log(($0 + min)/min) / log(max/min) }
 
         lSpectrumView.setNormLogBins(logBins)
         rSpectrumView.setNormLogBins(logBins)
-    }
-
-
-    override func segueToConfigView() {
-        performSegue(withIdentifier: "SegueToSpectrumsConfig", sender: nil)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        analyzer.removeTap()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        analyzer.runPerSample()
     }
 }
