@@ -9,6 +9,7 @@
 import UIKit
 
 class MeterView: UIView {
+    
 
     func setDynamics(values: SignalDynamics) {
         bar.setDynamics(values)
