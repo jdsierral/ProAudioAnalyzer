@@ -32,7 +32,9 @@ class SpectrumView: UIView {
             if n == 0 { continue }
             let dif = normLogBins[n] - normLogBins[lastIndx]
             let mag = bounds.width * dif
-            if mag < 1.0 { indxToPlot[n] = -1 } else {
+            if mag < 1.0 {
+                indxToPlot[n] = -1
+            } else {
                 lastIndx = n
             }
         }

@@ -26,7 +26,7 @@ class ComplexSpectrum : Spectrum {
         fft = FFT(fftSize: fftSize)
     }
 
-    func computeSpectrum(dataPtr: UnsafeMutablePointer<Double>) {
+    override func computeSpectrum(dataPtr: UnsafeMutablePointer<Double>) {
 		fft.process(dataPtr: dataPtr, specPtr: &spectrum)
     }
 }

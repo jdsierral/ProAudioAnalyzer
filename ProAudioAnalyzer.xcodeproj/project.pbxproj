@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C0001AF212C9ADA004DCE65 /* TransferFunctionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0001AE212C9ADA004DCE65 /* TransferFunctionView.swift */; };
 		2C1B98951FDF7A6E000F6ABA /* Spectrum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1B98941FDF7A6E000F6ABA /* Spectrum.swift */; };
 		2C36BAD71FDEB76F009A236D /* SpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C36BAD61FDEB76F009A236D /* SpectrumView.swift */; };
 		2C36BADA1FDEB782009A236D /* SpectrumAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C36BAD81FDEB781009A236D /* SpectrumAnalyzer.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C0001AE212C9ADA004DCE65 /* TransferFunctionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFunctionView.swift; sourceTree = "<group>"; };
 		2C1B98941FDF7A6E000F6ABA /* Spectrum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spectrum.swift; sourceTree = "<group>"; };
 		2C36BAD61FDEB76F009A236D /* SpectrumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectrumView.swift; sourceTree = "<group>"; };
 		2C36BAD81FDEB781009A236D /* SpectrumAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpectrumAnalyzer.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 		2CBF50CA1FDD3EAE000168FA /* TransferFunction */ = {
 			isa = PBXGroup;
 			children = (
+				2C0001AE212C9ADA004DCE65 /* TransferFunctionView.swift */,
 				2CBF50D11FDD45BD000168FA /* TransferFunctionViewController.swift */,
 				2C4F34AB1FDDE68E00DB82DA /* DSP */,
 			);
@@ -318,6 +321,7 @@
 				2C36BADA1FDEB782009A236D /* SpectrumAnalyzer.swift in Sources */,
 				2C4F34B21FDDE6A800DB82DA /* BaseTracker.swift in Sources */,
 				2C36BAE31FDF290F009A236D /* Goniometer.swift in Sources */,
+				2C0001AF212C9ADA004DCE65 /* TransferFunctionView.swift in Sources */,
 				2C4F34BB1FDDE6C200DB82DA /* MeterBarView.swift in Sources */,
 				2CBF50B41FDD3D9C000168FA /* AppDelegate.swift in Sources */,
 				2C36BAE91FDF475F009A236D /* CircularBuffer.swift in Sources */,

@@ -41,15 +41,23 @@ class SpectrumViewController: AnalyzerViewController {
     }
 
     override func updateGUI() {
-        analyzer.lSpectrum.triggerUpdate {
-            let ptr = lSpectrumView.mags!
-            analyzer.lSpectrum.dumpData(ptr: ptr)
-            lSpectrumView.setNeedsDisplay()
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.analyzer.lSpectrum.triggerUpdate {
+                let ptr = self.lSpectrumView.mags!
+                DispatchQueue.main.async {
+                    self.analyzer.lSpectrum.dumpData(ptr: ptr)
+                    self.lSpectrumView.setNeedsDisplay()
+                }
+            }
         }
-        analyzer.rSpectrum.triggerUpdate {
-            let ptr = rSpectrumView.mags!
-            analyzer.rSpectrum.dumpData(ptr: ptr)
-            rSpectrumView.setNeedsDisplay()
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.analyzer.rSpectrum.triggerUpdate {
+                let ptr = self.rSpectrumView.mags!
+                DispatchQueue.main.async {
+                    self.analyzer.rSpectrum.dumpData(ptr: ptr)
+                    self.rSpectrumView.setNeedsDisplay()
+                }
+            }
         }
     }
 

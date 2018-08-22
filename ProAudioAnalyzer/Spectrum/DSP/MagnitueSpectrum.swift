@@ -45,7 +45,7 @@ class MagnitudeSpectrum : Spectrum{
         spectrumMagdBNorm.deallocate()
     }
 
-    func computeSpectrum(dataPtr: UnsafeMutablePointer<Double>) {
+    override func computeSpectrum(dataPtr: UnsafeMutablePointer<Double>) {
 		fft.process(dataPtr: dataPtr, fftMagPtr: spectrumMag)
     }
 
