@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 let DBG = true
 
@@ -19,9 +20,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        let session = AVAudioSession.sharedInstance()
+        
+        do {
+            try session.setCategory(AVAudioSessionCategoryPlayAndRecord, mode: AVAudioSessionModeMeasurement)
+            session.requestRecordPermission { (success) in
+                if success {
+                    print("Permission Granted")
+                } else {
+                    print("Permission Denied")
+                }
+            }
+        }    catch    {
+            print("Audio session not loaded properly \(error)")
+        }
+        
+        let portDescriptions = session.availableInputs!
+        let modes = session.availableModes
+        let categories = session.availableCategories
+        
+        let inputSources = session.inputDataSources!
+        let outputSources = session.outputDataSources!
+        
+        print("//====================================//")
+        print("//====================================//")
+        print("//====================================//")
+        print("Port Descriptions \(portDescriptions)")
+        print("//====================================//")
+        print("Modes \(modes)")
+        print("//====================================//")
+        print("Categories \(categories)")
+        print("//====================================//")
+        print("Input Sources \(inputSources)")
+        print("//====================================//")
+        print("Output Sources \(outputSources)")
+        print("//====================================//")
+        print("//====================================//")
+        print("//====================================//")
 
         audioController = AVAudioController(sampleRate: sampleRate, bufferSize: bufferSize)
-        // Override point for customization after application launch.
         return true
     }
 
